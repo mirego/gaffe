@@ -12,7 +12,7 @@ gem 'gaffe'
 
 ## Usage
 
-TBD.
+You don’t have to do anything!
 
 ## License
 

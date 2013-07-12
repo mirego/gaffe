@@ -1,0 +1,26 @@
+module Gaffe
+  class ErrorsController < ::ApplicationController
+    before_filter :fetch_exception, only: %w(show)
+    before_filter :append_view_paths
+
+    layout 'error'
+
+    def show
+      render "errors/#{@rescue_response}", status: @status_code
+    end
+
+  protected
+
+    def fetch_exception
+      @exception = env['action_dispatch.exception']
+      @status_code = ActionDispatch::ExceptionWrapper.new(env, @exception).status_code
+      @rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[@exception.class.name]
+    end
+
+  private
+
+    def append_view_paths
+      append_view_path File.expand_path('../../../app/views', __FILE__)
+    end
+  end
+end
