@@ -32,6 +32,22 @@ end
 Gaffe.enable!
 ```
 
+The only required thing to do in your custom controller is to include the `Gaffe::Errors` module.
+
+```ruby
+class ErrorsController < ApplicationController
+  include Gaffe::Errors
+  skip_before_filter :ensure_current_user
+
+  def show
+    # The following variables are available:
+    @exception # The encountered exception (Eg. `#<ActiveRecord::NotFound …>`)
+    @status_code # The status code we should return (Eg. `404`)
+    @rescue_response # The "standard" name for the status code (Eg. `:not_found`)
+  end
+end
+```
+
 ### Custom views
 
 You can (and should!) also use your own views. You just have to create a layout:
