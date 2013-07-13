@@ -12,7 +12,42 @@ gem 'gaffe'
 
 ## Usage
 
-You don’t have to do anything!
+The easiest way to use Gaffe is with an initializer:
+
+```ruby
+# config/initializers/gaffe.rb
+Gaffe.enable!
+```
+
+### Custom controller
+
+However, if you want to use your own controller:
+
+```ruby
+# config/initializers/gaffe.rb
+Gaffe.configure do |config|
+  config.errors_controller = ErrorsController
+end
+
+Gaffe.enable!
+```
+
+### Custom view
+
+You can (and should!) also use your own views. You just have to create a layout:
+
+```
+<!-- app/views/layouts/error.html.erb -->
+<h1>Error!</h1>
+<%= yield %>
+```
+
+And create a different view for [each possible error rescue response](https://github.com/rails/rails/blob/f9ceefd3b9c3cea2460a89799156f2c532c4491c/actionpack/lib/action_dispatch/middleware/exception_wrapper.rb). For example, for `404` errors:
+
+```
+<!-- app/views/errors/not_found.html.erb -->
+<p>This page does not exist.</p>
+```
 
 ## License
 

@@ -1,6 +1,23 @@
 require 'gaffe/version'
+require 'gaffe/errors'
+require 'gaffe/errors_controller'
 
 module Gaffe
-end
+  def self.configure
+    yield configuration
+  end
 
-require 'gaffe/railtie' if defined?(Rails) && Rails::VERSION::MAJOR >= 3
+  def self.configuration
+    @configuration ||= OpenStruct.new
+  end
+
+  def self.errors_controller
+    configuration.errors_controller ||= Gaffe::ErrorsController
+  end
+
+  def self.enable!
+    Rails.application.config.exceptions_app = lambda do |env|
+      Gaffe.errors_controller.action(:show).call(env)
+    end
+  end
+end
