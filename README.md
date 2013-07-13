@@ -34,6 +34,8 @@ Gaffe.enable!
 
 The only required thing to do in your custom controller is to include the `Gaffe::Errors` module.
 
+Only `show` will be called so you might want to overwrite it. You might also want to get rid of filters and other stuff.
+
 ```ruby
 class ErrorsController < ApplicationController
   include Gaffe::Errors
