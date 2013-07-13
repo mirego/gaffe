@@ -32,7 +32,7 @@ end
 Gaffe.enable!
 ```
 
-### Custom view
+### Custom views
 
 You can (and should!) also use your own views. You just have to create a layout:
 
@@ -47,6 +47,18 @@ And create a different view for [each possible error rescue response](https://gi
 ```
 <!-- app/views/errors/not_found.html.erb -->
 <p>This page does not exist.</p>
+```
+
+### Custom exceptions
+
+If your application is raising custom exceptions (through gems or your code)
+and you want to render specific views when it happens, you can map them to
+specific rescue responses.
+
+```ruby
+# config/application.rb
+config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :forbidden)
+config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_acceptable)
 ```
 
 ## License
