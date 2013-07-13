@@ -12,7 +12,72 @@ gem 'gaffe'
 
 ## Usage
 
-TBD.
+The easiest way to use Gaffe is with an initializer:
+
+```ruby
+# config/initializers/gaffe.rb
+Gaffe.enable!
+```
+
+### Custom controller
+
+However, if you want to use your own controller:
+
+```ruby
+# config/initializers/gaffe.rb
+Gaffe.configure do |config|
+  config.errors_controller = ErrorsController
+end
+
+Gaffe.enable!
+```
+
+The only required thing to do in your custom controller is to include the `Gaffe::Errors` module.
+
+Only `show` will be called so you might want to overwrite it. You might also want to get rid of filters and other stuff.
+
+```ruby
+class ErrorsController < ApplicationController
+  include Gaffe::Errors
+  skip_before_filter :ensure_current_user
+
+  def show
+    # The following variables are available:
+    @exception # The encountered exception (Eg. `#<ActiveRecord::NotFound …>`)
+    @status_code # The status code we should return (Eg. `404`)
+    @rescue_response # The "standard" name for the status code (Eg. `:not_found`)
+  end
+end
+```
+
+### Custom views
+
+You can (and should!) also use your own views. You just have to create a layout:
+
+```
+<!-- app/views/layouts/error.html.erb -->
+<h1>Error!</h1>
+<%= yield %>
+```
+
+And create a different view for [each possible error rescue response](https://github.com/rails/rails/blob/f9ceefd3b9c3cea2460a89799156f2c532c4491c/actionpack/lib/action_dispatch/middleware/exception_wrapper.rb). For example, for `404` errors:
+
+```
+<!-- app/views/errors/not_found.html.erb -->
+<p>This page does not exist.</p>
+```
+
+### Custom exceptions
+
+If your application is raising custom exceptions (through gems or your code)
+and you want to render specific views when it happens, you can map them to
+specific rescue responses.
+
+```ruby
+# config/application.rb
+config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :forbidden)
+config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_acceptable)
+```
 
 ## License
 

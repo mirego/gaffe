@@ -1,0 +1,16 @@
+<h1>Error!</h1>
+
+<p>This is an error page brought to you by <strong>Gaffe</strong>.</p>
+
+<hr>
+
+<%= yield %>
+
+<hr>
+
+<p>You can overwrite this page by creating these files:</p>
+
+<pre>
+  <code><%= Rails.root.join('app', 'views', 'layouts', "error.html.[handler]") %></code>
+  <code><%= Rails.root.join('app', 'views', 'errors', "#{@rescue_response.to_s}.html.[handler]") %></code>
+</pre>
