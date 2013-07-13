@@ -1,6 +1,5 @@
 require 'gaffe/version'
 require 'gaffe/errors'
-require 'gaffe/errors_controller'
 
 module Gaffe
   def self.configure
@@ -12,7 +11,12 @@ module Gaffe
   end
 
   def self.errors_controller
-    configuration.errors_controller ||= Gaffe::ErrorsController
+    @errors_controller ||= (configuration.errors_controller || builtin_errors_controller)
+  end
+
+  def self.builtin_errors_controller
+    require 'gaffe/errors_controller'
+    Gaffe::ErrorsController
   end
 
   def self.enable!
