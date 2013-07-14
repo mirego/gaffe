@@ -1,16 +1,29 @@
-<h1>Error!</h1>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Error!</title>
+    <style type="text/css">
+      <%= File.read(File.join(Gaffe.root, 'app/assets/stylesheets/errors.css')).gsub("\n", ' ').gsub('  ', ' ') %>
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <h1>Error!</h1>
+      <p>This is an error page brought to you by <a href="https://github.com/mirego/gaffe">Gaffe</a>.</p>
 
-<p>This is an error page brought to you by <strong>Gaffe</strong>.</p>
+      <div class="content">
+        <hr>
+        <%= yield %>
+        <hr>
+      </div>
 
-<hr>
-
-<%= yield %>
-
-<hr>
-
-<p>You can overwrite this page by creating these files:</p>
+      <p>You can overwrite this page by creating these files:</p>
 
 <pre>
-  <code><%= Rails.root.join('app', 'views', 'layouts', "error.html.[handler]") %></code>
-  <code><%= Rails.root.join('app', 'views', 'errors', "#{@rescue_response.to_s}.html.[handler]") %></code>
+<code><%= Rails.root.join('app', 'views', 'layouts', "error.html.<em>[handler]</em>").to_s.html_safe %></code>
+<code><%= Rails.root.join('app', 'views', 'errors', "#{@rescue_response.to_s}.html.<em>[handler]</em>").to_s.html_safe %></code>
 </pre>
+    </div>
+  </body>
+</html>

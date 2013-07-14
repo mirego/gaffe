@@ -29,4 +29,8 @@ module Gaffe
       Gaffe.errors_controller.action(:show).call(env)
     end
   end
+
+  def self.root
+    File.expand_path('../../', __FILE__)
+  end
 end
