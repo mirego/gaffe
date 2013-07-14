@@ -1,0 +1,60 @@
+html { font-size: 62.5% }
+* { margin: 0; padding: 0; font-size: 100%; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+body {
+  font-size: 150%;
+  font-family: Helvetica, Arial, sans-serif;
+  background: #fafafa;
+  font-weight: 300;
+  padding: 60px;
+  line-height: 1.5;
+}
+
+#wrap {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+hr {
+  display: none;
+}
+
+p {
+  margin: 0 0 15px;
+}
+
+a {
+  color: #F3711B;
+}
+
+h1 {
+  font-size: 240%;
+  margin: 0 0 15px;
+  font-weight: 300;
+}
+
+.content {
+  background: #FFFCE1;
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+pre {
+  background: #fafafa;
+  padding: 15px;
+  line-height: 1.8;
+  color: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,0.1);
+  overflow: auto;
+}
+
+pre em {
+  font-style: normal;
+  color: rgba(0,0,0,0.5);
+}
