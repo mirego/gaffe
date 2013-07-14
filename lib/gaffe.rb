@@ -30,6 +30,7 @@ module Gaffe
     end
   end
 
+  # Return the root path of the gem
   def self.root
     File.expand_path('../../', __FILE__)
   end
