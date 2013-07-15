@@ -1,6 +1,10 @@
 # Gaffe
 
-Gaffe handles Rails error pages in a clean, simple way.
+Gaffe handles Rails error pages in a clean, simple way. The default error page looks like this:
+
+![](http://i.imgur.com/9gPfCOm.png)
+
+You should overwrite it though, it’s very easy to do so.
 
 ## Installation
 
