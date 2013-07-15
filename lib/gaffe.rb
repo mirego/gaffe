@@ -1,4 +1,6 @@
 require 'gaffe/version'
+
+require 'ostruct'
 require 'gaffe/errors'
 
 module Gaffe
