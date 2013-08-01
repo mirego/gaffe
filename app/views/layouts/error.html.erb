@@ -20,9 +20,10 @@
 
       <p>You can overwrite this page by creating these files:</p>
 
+<% handlers = ActionView::Template::Handlers.extensions.map(&:to_s).join(', ') %>
 <pre>
-<code><%= Rails.root.join('app', 'views', 'layouts', "error.html.<em>[handler]</em>").to_s.html_safe %></code>
-<code><%= Rails.root.join('app', 'views', 'errors', "#{@rescue_response.to_s}.html.<em>[handler]</em>").to_s.html_safe %></code>
+<code><%= Rails.root.join('app', 'views', 'layouts', "error.html.<em title='#{handlers}'>handler</em>").to_s.html_safe %></code>
+<code><%= Rails.root.join('app', 'views', 'errors', "#{@rescue_response.to_s}.html.<em title='#{handlers}'>handler</em>").to_s.html_safe %></code>
 </pre>
     </div>
   </body>
