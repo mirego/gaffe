@@ -7,7 +7,7 @@ describe Gaffe::Errors do
       let(:env) { request.env.merge 'action_dispatch.exception' => exception }
       let(:exception) { ActionController::RoutingError.new(:foo) }
 
-      let(:response) { Gaffe.errors_controller.action(:show).call(env) }
+      let(:response) { Gaffe.errors_controller_for_request(env).action(:show).call(env) }
       subject { response.last }
 
       its(:status) { should eql 404 }

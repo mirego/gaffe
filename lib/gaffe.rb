@@ -14,11 +14,6 @@ module Gaffe
     @configuration ||= OpenStruct.new
   end
 
-  # Return either the user-defined controller or our default controller
-  def self.errors_controller
-    @errors_controller ||= (configuration.errors_controller || builtin_errors_controller)
-  end
-
   # Return our default controller
   def self.builtin_errors_controller
     require 'gaffe/errors_controller'
@@ -28,8 +23,20 @@ module Gaffe
   # Configure Rails to use our code when encountering exceptions
   def self.enable!
     Rails.application.config.exceptions_app = lambda do |env|
-      Gaffe.errors_controller.action(:show).call(env)
+      Gaffe.errors_controller_for_request(env).action(:show).call(env)
     end
+  end
+
+  # Return the right errors controller to use for the request that
+  # triggered the error
+  def self.errors_controller_for_request(env)
+    controller = configuration.errors_controller
+
+    if controller.is_a?(Hash)
+      controller = controller.detect { |pattern, _| env["REQUEST_URI"] =~ pattern }.try(:last)
+    end
+
+    controller || builtin_errors_controller
   end
 
   # Return the root path of the gem

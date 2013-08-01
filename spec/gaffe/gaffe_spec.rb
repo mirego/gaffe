@@ -22,7 +22,11 @@ describe Gaffe do
       its(:bar) { should eql :foo }
     end
 
-    describe :errors_controller do
+    describe :errors_controller_for_request do
+      let(:controller) { Gaffe.errors_controller_for_request(env) }
+      let(:request) { ActionDispatch::TestRequest.new }
+      let(:env) { request.env }
+
       context 'with custom-defined controller' do
         before do
           Gaffe.configure do |config|
@@ -30,12 +34,31 @@ describe Gaffe do
           end
         end
 
-        let(:controller) { Gaffe.errors_controller }
         it { expect(controller).to eql :foo }
       end
 
+      context 'with multiple custom-defined controllers' do
+        before do
+          Gaffe.configure do |config|
+            config.errors_controller = {
+              %r[^/web/] => :web_controller,
+              %r[^/api/] => :api_controller
+            }
+          end
+        end
+
+        context 'with error coming from matching URL' do
+          let(:env) { request.env.merge 'REQUEST_URI' => '/api/users' }
+          it { expect(controller).to eql :api_controller }
+        end
+
+        context 'with errors coming from non-matching URL' do
+          let(:env) { request.env.merge 'REQUEST_URI' => '/what' }
+          it { expect(controller).to eql Gaffe::ErrorsController }
+        end
+      end
+
       context 'without custom-defined controller' do
-        let(:controller) { Gaffe.errors_controller }
         it { expect(controller).to eql Gaffe::ErrorsController }
       end
     end
