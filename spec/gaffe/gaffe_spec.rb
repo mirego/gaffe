@@ -4,7 +4,7 @@ describe Gaffe do
   describe :ClassMethods do
     before do
       # Make sure we clear memoized variables before each test
-      [:@errors_controller, :@configuration].each do |variable|
+      [:@configuration].each do |variable|
         Gaffe.send :remove_instance_variable, variable if Gaffe.instance_variable_defined?(variable)
       end
     end
