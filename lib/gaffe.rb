@@ -16,8 +16,10 @@ module Gaffe
 
   # Return our default controller
   def self.builtin_errors_controller
-    require 'gaffe/errors_controller'
-    Gaffe::ErrorsController
+    @builtin_errors_controller ||= begin
+      require 'gaffe/errors_controller'
+      Gaffe::ErrorsController
+    end
   end
 
   # Configure Rails to use our code when encountering exceptions
