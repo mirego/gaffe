@@ -2,13 +2,6 @@ require 'spec_helper'
 
 describe Gaffe do
   describe :ClassMethods do
-    before do
-      # Make sure we clear memoized variables before each test
-      [:@configuration].each do |variable|
-        Gaffe.send :remove_instance_variable, variable if Gaffe.instance_variable_defined?(variable)
-      end
-    end
-
     describe :configure do
       subject { Gaffe.configuration }
       before do

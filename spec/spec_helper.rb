@@ -6,7 +6,13 @@ require 'gaffe'
 
 RSpec.configure do |config|
   config.before(:each) do
+    # Fake Rails.root
     Rails.stub(:root).and_return(RAILS_ROOT)
+
+    # Make sure we clear memoized variables before each test
+    [:@configuration].each do |variable|
+      Gaffe.send :remove_instance_variable, variable if Gaffe.instance_variable_defined?(variable)
+    end
   end
 end
 
