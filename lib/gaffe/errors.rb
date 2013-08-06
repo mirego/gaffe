@@ -23,7 +23,7 @@ module Gaffe
   private
 
     def append_view_paths
-      append_view_path File.expand_path('../../../app/views', __FILE__)
+      append_view_path Gaffe.root.join('app/views')
     end
   end
 end

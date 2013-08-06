@@ -1,6 +1,7 @@
 require 'gaffe/version'
 
 require 'ostruct'
+require 'pathname'
 require 'gaffe/errors'
 
 module Gaffe
@@ -43,6 +44,6 @@ module Gaffe
 
   # Return the root path of the gem
   def self.root
-    File.expand_path('../../', __FILE__)
+    Pathname.new(File.expand_path('../../', __FILE__))
   end
 end
