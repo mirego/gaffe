@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Error!</title>
     <style type="text/css">
-      <%= File.read(File.join(Gaffe.root, 'app/assets/stylesheets/errors.css')).gsub("\n", ' ').gsub('  ', ' ') %>
+      <%= File.read(Gaffe.root.join('app/assets/stylesheets/errors.css')).gsub("\n", ' ').gsub('  ', ' ') %>
     </style>
   </head>
   <body>
