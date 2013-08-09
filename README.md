@@ -83,7 +83,7 @@ You can (and should!) also use your own views. You just have to create a layout:
 <%= yield %>
 ```
 
-And create a different view for [each possible error rescue response](https://github.com/rails/rails/blob/f9ceefd3b9c3cea2460a89799156f2c532c4491c/actionpack/lib/action_dispatch/middleware/exception_wrapper.rb). For example, for `404` errors:
+And create a different view for [each possible error rescue response](https://github.com/mirego/gaffe/tree/master/app/views/errors) ([rails reference](https://github.com/rails/rails/blob/f9ceefd3b9c3cea2460a89799156f2c532c4491c/actionpack/lib/action_dispatch/middleware/exception_wrapper.rb)). For example, for `404` errors:
 
 ```erb
 <!-- app/views/errors/not_found.html.erb -->
