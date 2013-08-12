@@ -1,6 +1,7 @@
 # Gaffe
 
 [![Gem Version](https://badge.fury.io/rb/gaffe.png)](https://rubygems.org/gems/gaffe)
+[![Code Climate](https://codeclimate.com/github/mirego/gaffe.png)](https://codeclimate.com/github/mirego/gaffe)
 [![Build Status](https://travis-ci.org/mirego/gaffe.png?branch=master)](https://travis-ci.org/mirego/gaffe)
 
 Gaffe handles Rails error pages in a clean, simple way. The default error page looks like this:
