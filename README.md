@@ -1,14 +1,22 @@
-# Gaffe
+<p align="center">
+  <a href="https://github.com/mirego/gaffe">
+    <img src="http://i.imgur.com/PqI4CCD.png" alt="Gaffe" />
+  </a>
+  <br />
+  Gaffe handles Rails error pages in a clean, simple way.
+  <br /><br />
+  <a href="https://rubygems.org/gems/gaffe"><img src="https://badge.fury.io/rb/gaffe.png" /></a>
+  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="https://codeclimate.com/github/mirego/gaffe.png" /></a>
+  <a href="https://travis-ci.org/mirego/gaffe"><img src="https://travis-ci.org/mirego/gaffe.png?branch=master" /></a>
+</p>
 
-[![Gem Version](https://badge.fury.io/rb/gaffe.png)](https://rubygems.org/gems/gaffe)
-[![Code Climate](https://codeclimate.com/github/mirego/gaffe.png)](https://codeclimate.com/github/mirego/gaffe)
-[![Build Status](https://travis-ci.org/mirego/gaffe.png?branch=master)](https://travis-ci.org/mirego/gaffe)
+---
 
-Gaffe handles Rails error pages in a clean, simple way. The default error page looks like this:
+Gaffe makes having customized error pages in Rails applications an easy thing. It takes advantage of a feature present in Rails 3.2+ called `exceptions_app`.
+
+It comes with default error pages but makes it very easy to override them (which you should do). The default error pages look like this:
 
 ![](http://i.imgur.com/9gPfCOm.png)
-
-You should overwrite it though, it’s very easy to do so.
 
 ## Installation
 
@@ -106,6 +114,8 @@ config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_accep
 ## License
 
 `Gaffe` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
+
+The banana peel logo is based on [this lovely icon](http://thenounproject.com/noun/banana/#icon-No3075) by [Jeese Laney](http://thenounproject.com/the42), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
 
 ## About Mirego
 
