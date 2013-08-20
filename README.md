@@ -1,16 +1,8 @@
-<p align="center">
-  <a href="https://github.com/mirego/gaffe">
-    <img src="http://i.imgur.com/PqI4CCD.png" alt="Gaffe" />
-  </a>
-  <br />
-  Gaffe handles Rails error pages in a clean, simple way.
-  <br /><br />
-  <a href="https://rubygems.org/gems/gaffe"><img src="https://badge.fury.io/rb/gaffe.png" /></a>
-  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="https://codeclimate.com/github/mirego/gaffe.png" /></a>
-  <a href="https://travis-ci.org/mirego/gaffe"><img src="https://travis-ci.org/mirego/gaffe.png?branch=master" /></a>
-</p>
+# Gaffe
 
----
+[![Gem Version](https://badge.fury.io/rb/gaffe.png)](https://rubygems.org/gems/gaffe)
+[![Code Climate](https://codeclimate.com/github/mirego/gaffe.png)](https://codeclimate.com/github/mirego/gaffe)
+[![Build Status](https://travis-ci.org/mirego/gaffe.png?branch=master)](https://travis-ci.org/mirego/gaffe)
 
 Gaffe makes having customized error pages in Rails applications an easy thing. It takes advantage of a feature present in Rails 3.2+ called `exceptions_app`.
 
