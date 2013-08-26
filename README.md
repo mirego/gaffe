@@ -74,6 +74,19 @@ class ErrorsController < ApplicationController
 end
 ```
 
+For example, you might want your `Api::ErrorsController` to return a standard JSON response:
+
+```ruby
+class Api::ErrorsController < Api::ApplicationController
+  include Gaffe::Errors
+  skip_before_filter :ensure_current_user
+
+  def show
+    render json: { error: @rescue_response }, status: @status_code
+  end
+end
+```
+
 ### Custom views
 
 You can (and should!) also use your own views. You just have to create a layout:
