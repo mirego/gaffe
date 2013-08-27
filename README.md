@@ -122,6 +122,17 @@ config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :forbid
 config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_acceptable)
 ```
 
+### Rails development mode
+
+Rails prefers to render its own debug-friendly errors in the `development` environment,
+which is totally understandable. However, if you want to test Gaffe’s behavior in development
+you’ll have to edit the `config/environments/development.rb` file.
+
+```ruby
+# Make Rails use `exceptions_app` in development
+config.consider_all_requests_local = false
+```
+
 ## License
 
 `Gaffe` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
