@@ -64,7 +64,11 @@ Gaffe.enable!
 
 The only required thing to do in your custom controller is to include the `Gaffe::Errors` module.
 
-Only `show` will be called so you might want to overwrite it. You might also want to get rid of filters and other stuff.
+Only `show` will be called so you might want to override it. If you don’t override it, Gaffe will
+try to render the view `"errors/#{@rescue_response}"` within your application (or use its default
+error page if the view doesn’t exist).
+
+You might also want to get rid of filters and other stuff to make sure that error pages are always accessible.
 
 ```ruby
 class ErrorsController < ApplicationController
