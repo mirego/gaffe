@@ -7,6 +7,8 @@
   <br /><br />
   <a href="https://rubygems.org/gems/gaffe"><img src="https://badge.fury.io/rb/gaffe.png" /></a>
   <a href="https://codeclimate.com/github/mirego/gaffe"><img src="https://codeclimate.com/github/mirego/gaffe.png" /></a>
+  <a href='https://coveralls.io/r/mirego/gaffe?branch=master'><img src='https://coveralls.io/repos/mirego/gaffe/badge.png?branch=master' /></a>
+  <a href='https://gemnasium.com/mirego/gaffe'><img src="https://gemnasium.com/mirego/gaffe.png" /></a>
   <a href="https://travis-ci.org/mirego/gaffe"><img src="https://travis-ci.org/mirego/gaffe.png?branch=master" /></a>
 </p>
 
