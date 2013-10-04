@@ -124,8 +124,8 @@ specific rescue responses.
 
 ```ruby
 # config/application.rb
-config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :forbidden)
-config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_acceptable)
+config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
+config.action_dispatch.rescue_responses.merge! 'MyCustomException' => :not_acceptable
 ```
 
 ### Rails development mode
