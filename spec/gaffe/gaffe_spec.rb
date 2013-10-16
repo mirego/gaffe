@@ -66,6 +66,8 @@ describe Gaffe do
         expect(Gaffe::ErrorsController).to receive(:action).with(:show).and_return(action_double)
         expect(action_double).to receive(:call).with(env)
 
+        # This is the line Rails itself calls
+        # https://github.com/rails/rails/blob/fee49a10492efc99409c03f7096d5bd3377b0bbc/actionpack/lib/action_dispatch/middleware/show_exceptions.rb#L43
         Rails.application.config.exceptions_app.call(env)
       end
     end
