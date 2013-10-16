@@ -55,5 +55,21 @@ describe Gaffe do
         it { expect(controller).to eql Gaffe::ErrorsController }
       end
     end
+
+    describe :enable! do
+      let(:env) { ActionDispatch::TestRequest.new.env }
+      let(:action_double) { double(call: lambda { |env| [400, {}, 'SOMETHING WENT WRONG.'] }) }
+      before { Gaffe.enable! }
+
+      specify do
+        expect(Gaffe).to receive(:errors_controller_for_request).with(env).and_call_original
+        expect(Gaffe::ErrorsController).to receive(:action).with(:show).and_return(action_double)
+        expect(action_double).to receive(:call).with(env)
+
+        # This is the line Rails itself calls
+        # https://github.com/rails/rails/blob/fee49a10492efc99409c03f7096d5bd3377b0bbc/actionpack/lib/action_dispatch/middleware/show_exceptions.rb#L43
+        Rails.application.config.exceptions_app.call(env)
+      end
+    end
   end
 end
