@@ -30,6 +30,16 @@ describe Gaffe do
         it { expect(controller).to eql :foo }
       end
 
+      context 'with custom-defined controller that respond to `#constantize`' do
+        before do
+          Gaffe.configure do |config|
+            config.errors_controller = "String"
+          end
+        end
+
+        it { expect(controller).to eql String }
+      end
+
       context 'with multiple custom-defined controllers' do
         before do
           Gaffe.configure do |config|

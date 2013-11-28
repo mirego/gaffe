@@ -39,7 +39,9 @@ module Gaffe
       controller = controller.detect { |pattern, _| env["REQUEST_URI"] =~ pattern }.try(:last)
     end
 
-    controller || builtin_errors_controller
+    controller ||= builtin_errors_controller
+
+    controller.respond_to?(:constantize) ? controller.constantize : controller
   end
 
   # Return the root path of the gem
