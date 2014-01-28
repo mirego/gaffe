@@ -16,7 +16,7 @@
 
 It comes with default error pages but makes it very easy to override them (which you should do). The default error pages look like this:
 
-![](http://i.imgur.com/9gPfCOm.png)
+![](http://i.imgur.com/nz5nWXn.png)
 
 ## Installation
 
