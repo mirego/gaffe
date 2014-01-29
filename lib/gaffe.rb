@@ -36,7 +36,7 @@ module Gaffe
     controller = configuration.errors_controller
 
     if controller.is_a?(Hash)
-      controller = controller.detect { |pattern, _| env["REQUEST_URI"] =~ pattern }.try(:last)
+      controller = controller.find { |pattern, _| env['REQUEST_URI'] =~ pattern }.try(:last)
     end
 
     controller ||= builtin_errors_controller

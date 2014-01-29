@@ -9,11 +9,9 @@ module Gaffe
     end
 
     def show
-      begin
-        render "errors/#{@rescue_response}", status: @status_code
-      rescue ActionView::MissingTemplate
-        render "errors/internal_server_error", status: 500
-      end
+      render "errors/#{@rescue_response}", status: @status_code
+    rescue ActionView::MissingTemplate
+      render 'errors/internal_server_error', status: 500
     end
 
   protected

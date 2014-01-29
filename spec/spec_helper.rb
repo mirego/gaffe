@@ -1,10 +1,10 @@
-$:.unshift File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
 require 'coveralls'
 Coveralls.wear!
 
 require 'rspec'
-require "action_controller/railtie"
+require 'action_controller/railtie'
 require 'gaffe'
 
 RSpec.configure do |config|

@@ -12,7 +12,7 @@ describe Gaffe::Errors do
       context 'with builtin exception' do
         let(:exception) { ActionController::RoutingError.new(:foo) }
         its(:status) { should eql 404 }
-        its(:body) { should match /Not Found/ }
+        its(:body) { should match(/Not Found/) }
       end
 
       context 'with custom exception and missing view' do
@@ -25,7 +25,7 @@ describe Gaffe::Errors do
 
         let(:exception) { exception_class.new }
         its(:status) { should eql 500 }
-        its(:body) { should match /Internal Server Error/ }
+        its(:body) { should match(/Internal Server Error/) }
       end
     end
   end

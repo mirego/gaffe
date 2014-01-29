@@ -33,7 +33,7 @@ describe Gaffe do
       context 'with custom-defined controller that respond to `#constantize`' do
         before do
           Gaffe.configure do |config|
-            config.errors_controller = "String"
+            config.errors_controller = 'String'
           end
         end
 
