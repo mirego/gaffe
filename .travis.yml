@@ -9,3 +9,8 @@ gemfile:
   - gemfiles/Gemfile.rails-3.2.x
 
 script: "echo 'DO IT' && bundle exec rake spec"
+
+notifications:
+  hipchat:
+    rooms:
+      secure: HwIKOZp8SIVCnPseNTJqZgrUBr7/7z5RGczqX7lGWOXK/S6Zwm/YyglC5ueN+HW2Tsc9nQkVLmLb7fH4kctdeanKea3TTfYS1+GmUOZPhFie4nFnywIgz7os//LfNONIF42Ix94HsmuhsQ6yVPMOU+mYnN9L/ZrWML5NH03mIOw=
