@@ -18,6 +18,14 @@
         <hr>
       </div>
 
+      <% if Rails.env.test? %>
+        <p>Original exception (only displayed in <strong>test</strong> environment):</p>
+
+<pre>
+<code><%= @exception.inspect %></code>
+</pre>
+      <% end %>
+
       <p>You can overwrite this page by creating these files:</p>
 
 <% handlers = ActionView::Template::Handlers.extensions.map(&:to_s).join(', ') %>
