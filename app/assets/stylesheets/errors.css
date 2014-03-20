@@ -1,21 +1,12 @@
-html {
-  font-size: 62.5%;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
+html { font-size: 62.5% }
+* { margin: 0; padding: 0; font-size: 100%; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 body {
-  padding: 60px;
-  background: #fafafa;
   font-size: 150%;
   font-family: Helvetica, Arial, sans-serif;
+  background: #fafafa;
   font-weight: 300;
+  padding: 60px;
   line-height: 1.5;
 }
 
@@ -23,11 +14,10 @@ body {
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
-  padding: 30px;
   background: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
   border-radius: 3px;
-  border-top: 3px solid #b00f08;
 }
 
 hr {
@@ -39,41 +29,39 @@ p {
 }
 
 a {
-  color: #731217;
-}
-
-a:hover {
-  color: #b00f08;
+  color: #F3711B;
 }
 
 h1 {
-  margin: 0 0 15px;
   font-size: 240%;
+  margin: 0 0 15px;
   font-weight: 300;
-  color: #731217;
 }
 
 .content {
+  background: #FFFCE1;
   padding: 15px;
   margin: 15px 0;
-  background: #eee;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  color: #666;
+  border: 1px solid rgba(0,0,0,0.1);
 }
 
 pre {
-  overflow: auto;
-  padding: 15px;
   background: #fafafa;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 15px 0;
   line-height: 1.8;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0,0,0,0.8);
+  border: 1px solid rgba(0,0,0,0.1);
+  overflow: auto;
+}
+
+pre.exception {
+  background-color: #FFEDED;
 }
 
 pre em {
   font-style: normal;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0,0,0,0.5);
   border-bottom: 1px dotted;
   cursor: help;
 }
