@@ -1,0 +1,12 @@
+linters:
+  CapitalizationInSelector:
+    enabled: false
+  SortedProperties:
+    enabled: false
+  LeadingZero:
+    enabled: false
+  BorderZero:
+    enabled: false
+  SelectorDepth:
+    enabled: true
+    max_depth: 4
