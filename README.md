@@ -75,25 +75,39 @@ You might also want to get rid of filters and other stuff to make sure that erro
 ```ruby
 class ErrorsController < ApplicationController
   include Gaffe::Errors
-  skip_before_filter :ensure_current_user
 
+  # Make sure anonymous users can see the page
+  skip_before_filter :authenticate_user!
+
+  # Override 'error' layout
+  layout 'application'
+
+  # Render the correct template based on the exception “standard” code.
+  # Eg. For a 404 error, the `errors/not_found` template will be rendered.
   def show
-    # The following variables are available:
-    @exception # The encountered exception (Eg. `#<ActiveRecord::NotFound …>`)
-    @status_code # The status code we should return (Eg. `404`)
-    @rescue_response # The "standard" name for the status code (Eg. `:not_found`)
+    # Here, the `@exception` variable contains the original raised error
+    render "errors/#{@rescue_response}", status: @status_code
   end
 end
 ```
 
-For example, you might want your `Api::ErrorsController` to return a standard JSON response:
+For example, you might want your `API::ErrorsController` to return a standard JSON response:
 
 ```ruby
-class Api::ErrorsController < Api::ApplicationController
+class API::ErrorsController < API::ApplicationController
   include Gaffe::Errors
-  skip_before_filter :ensure_current_user
 
+  # Make sure anonymous users can see the page
+  skip_before_filter :authenticate_user!
+
+  # Disable layout (your `API::ApplicationController` probably does this already)
+  layout false
+
+  # Render a simple JSON response containing the error “standard” code
+  # plus the exception name and backtrace if we’re in development.
   def show
+    output = { error: @rescue_response }
+    output.merge! exception: @exception.inspect, backtrace: @exception.backtrace.first(10) if Rails.env.development?
     render json: { error: @rescue_response }, status: @status_code
   end
 end
