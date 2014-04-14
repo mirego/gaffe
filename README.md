@@ -157,6 +157,7 @@ config.consider_all_requests_local = false
 
 * [@remiprev](https://github.com/remiprev)
 * [@simonprev](https://github.com/simonprev)
+* [@jmuheim](https://github.com/jmuheim)
 
 ## License
 
