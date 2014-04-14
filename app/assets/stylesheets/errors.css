@@ -71,6 +71,10 @@ pre {
   color: rgba(0, 0, 0, 0.8);
 }
 
+pre.exception {
+  background-color: #ffeded;
+}
+
 pre em {
   font-style: normal;
   color: rgba(0, 0, 0, 0.5);
