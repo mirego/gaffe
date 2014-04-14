@@ -18,8 +18,8 @@
         <hr>
       </div>
 
-      <% if Rails.env.test? %>
-        <p>Original exception (only displayed in <strong>test</strong> environment):</p>
+      <% if Rails.env.development? || Rails.env.test? %>
+        <p>Original exception (only displayed in <strong>development</strong> and <strong>test</strong> environment):</p>
 
 <pre>
 <code><%= @exception.inspect %></code>
