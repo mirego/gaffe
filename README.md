@@ -142,7 +142,7 @@ config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbid
 config.action_dispatch.rescue_responses.merge! 'MyCustomException' => :not_acceptable
 ```
 
-### Rails development mode
+### Rails development environment
 
 Rails prefers to render its own debug-friendly errors in the `development` environment,
 which is totally understandable. However, if you want to test Gaffe’s behavior in development
@@ -151,6 +151,19 @@ you’ll have to edit the `config/environments/development.rb` file.
 ```ruby
 # Make Rails use `exceptions_app` in development
 config.consider_all_requests_local = false
+```
+
+### Rails test environment
+
+You also have to configure Rails’ `test` environment so it lets Gaffe handle exceptions
+in request tests/specs. You’ll have to edit the `config/environments/test.rb` file.
+
+```ruby
+# Make Rails use `exceptions_app` in tests
+config.consider_all_requests_local = false
+
+# Render exceptions instead of raising them
+config.action_dispatch.show_exceptions = true
 ```
 
 ## Contributors
