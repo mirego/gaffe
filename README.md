@@ -174,7 +174,7 @@ config.action_dispatch.show_exceptions = true
 
 ## License
 
-`Gaffe` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
+`Gaffe` is © 2013-2014 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
 
 The mushroom cloud logo is based on [this lovely icon](http://thenounproject.com/noun/mushroom-cloud/#icon-No18596) by [Gokce Ozan](http://thenounproject.com/occultsearcher), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
 
