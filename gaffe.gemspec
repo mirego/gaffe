@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 2.14'
   spec.add_development_dependency 'coveralls'
 
-  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop', '>= 0.21'
   spec.add_development_dependency 'scss-lint'
   spec.add_development_dependency 'phare'
 

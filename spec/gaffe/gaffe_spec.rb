@@ -68,7 +68,7 @@ describe Gaffe do
 
     describe :enable! do
       let(:env) { ActionDispatch::TestRequest.new.env }
-      let(:action_double) { double(call: lambda { |env| [400, {}, 'SOMETHING WENT WRONG.'] }) }
+      let(:action_double) { double(call: proc { [400, {}, 'SOMETHING WENT WRONG.'] }) }
       before { Gaffe.enable! }
 
       specify do
