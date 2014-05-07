@@ -1,7 +1,9 @@
 AllCops:
-  Includes:
+  Include:
     - Gemfile
     - Rakefile
+  Exclude:
+    - vendor/*/**
 
 Documentation:
   Enabled: false

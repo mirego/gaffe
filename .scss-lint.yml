@@ -1,7 +1,7 @@
 linters:
   CapitalizationInSelector:
     enabled: false
-  SortedProperties:
+  PropertySortOrder:
     enabled: false
   LeadingZero:
     enabled: false

@@ -44,8 +44,8 @@ describe Gaffe do
         before do
           Gaffe.configure do |config|
             config.errors_controller = {
-              %r[^/web/] => :web_controller,
-              %r[^/api/] => :api_controller
+              %r{^/web/} => :web_controller,
+              %r{^/api/} => :api_controller
             }
           end
         end

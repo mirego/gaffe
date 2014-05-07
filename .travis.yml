@@ -8,7 +8,9 @@ gemfile:
   - gemfiles/Gemfile.rails-4.0
   - gemfiles/Gemfile.rails-3.2.x
 
-script: "echo 'DO IT' && bundle exec rake spec"
+script:
+  - 'echo "Checking code style" && bundle exec phare'
+  - 'echo "Running specs" && bundle exec rake spec'
 
 notifications:
   hipchat:
