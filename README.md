@@ -5,11 +5,11 @@
   <br />
   Gaffe makes having customized error pages in Rails applications an easy thing.<br /> It takes advantage of a feature present in Rails 3.2 (and 4.0, obviously) called <code>exceptions_app</code>.
   <br /><br />
-  <a href="https://rubygems.org/gems/gaffe"><img src="https://badge.fury.io/rb/gaffe.png" /></a>
-  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="https://codeclimate.com/github/mirego/gaffe.png" /></a>
-  <a href='https://coveralls.io/r/mirego/gaffe?branch=master'><img src='https://coveralls.io/repos/mirego/gaffe/badge.png?branch=master' /></a>
-  <a href='https://gemnasium.com/mirego/gaffe'><img src="https://gemnasium.com/mirego/gaffe.png" /></a>
-  <a href="https://travis-ci.org/mirego/gaffe"><img src="https://travis-ci.org/mirego/gaffe.png?branch=master" /></a>
+  <a href="https://rubygems.org/gems/gaffe"><img src="http://img.shields.io/gem/v/gaffe.svg" /></a>
+  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="http://img.shields.io/codeclimate/github/mirego/gaffe.svg" /></a>
+  <a href='https://coveralls.io/r/mirego/gaffe?branch=master'><img src="http://img.shields.io/coveralls/mirego/gaffe.svg" /></a>
+  <a href='https://gemnasium.com/mirego/gaffe'><img src="http://img.shields.io/gemnasium/mirego/gaffe.svg" /></a>
+  <a href="https://travis-ci.org/mirego/gaffe"><img src="http://img.shields.io/travis/mirego/gaffe.svg" /></a>
 </p>
 
 ---
