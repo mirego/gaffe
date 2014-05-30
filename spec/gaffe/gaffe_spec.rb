@@ -44,8 +44,8 @@ describe Gaffe do
         before do
           Gaffe.configure do |config|
             config.errors_controller = {
-              %r[^/web/] => :web_controller,
-              %r[^/api/] => :api_controller
+              %r{^/web/} => :web_controller,
+              %r{^/api/} => :api_controller
             }
           end
         end
@@ -68,7 +68,7 @@ describe Gaffe do
 
     describe :enable! do
       let(:env) { ActionDispatch::TestRequest.new.env }
-      let(:action_double) { double(call: lambda { |env| [400, {}, 'SOMETHING WENT WRONG.'] }) }
+      let(:action_double) { double(call: proc { [400, {}, 'SOMETHING WENT WRONG.'] }) }
       before { Gaffe.enable! }
 
       specify do
