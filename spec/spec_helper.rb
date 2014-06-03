@@ -8,12 +8,18 @@ require 'action_controller/railtie'
 require 'gaffe'
 
 RSpec.configure do |config|
+  # Disable `should` syntax
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   config.before(:each) do
     # Fake Rails.root
-    Rails.stub(:root).and_return(RAILS_ROOT)
+    allow(Rails).to receive(:root).and_return(RAILS_ROOT)
 
     # Fake Rails.application
-    Rails.stub(:application).and_return OpenStruct.new(config: OpenStruct.new, env_config: {})
+    application = double('Rails Application', config: OpenStruct.new, env_config: {})
+    allow(Rails).to receive(:application).and_return(application)
 
     # Make sure we clear memoized variables before each test
     [:@configuration].each do |variable|
