@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaffe do
   describe :ClassMethods do
     describe :configure do
-      subject { Gaffe.configuration }
+      let(:configuration) { Gaffe.configuration }
       before do
         Gaffe.configure do |config|
           config.foo = :bar
@@ -11,8 +11,8 @@ describe Gaffe do
         end
       end
 
-      its(:foo) { should eql :bar }
-      its(:bar) { should eql :foo }
+      it { expect(configuration.foo).to eql :bar }
+      it { expect(configuration.bar).to eql :foo }
     end
 
     describe :errors_controller_for_request do
