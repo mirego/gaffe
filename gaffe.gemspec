@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Rémi Prévost', 'Simon Prévost']
   spec.email         = ['rprevost@mirego.com', 'sprevost@mirego.com']
   spec.description   = 'Gaffe handles Rails error pages in a clean, simple way.'
-  spec.summary       = 'Gaffe handles Rails error pages in a clean, simple way.'
+  spec.summary       = spec.description
   spec.homepage      = 'https://github.com/mirego/gaffe'
   spec.license       = "BSD 3-Clause"
 
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec', '3.0.0'
+  spec.add_development_dependency 'rspec', '~> 3.1.0'
   spec.add_development_dependency 'coveralls'
 
   spec.add_development_dependency 'rubocop', '>= 0.21'
