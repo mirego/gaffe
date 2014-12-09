@@ -156,7 +156,7 @@ config.consider_all_requests_local = false
 ### Rails test environment
 
 You also have to configure Rails’ `test` environment so it lets Gaffe handle exceptions
-in request tests/specs. You’ll have to edit the `config/environments/test.rb` file.
+in request tests. You’ll have to edit the `config/environments/test.rb` file.
 
 ```ruby
 # Make Rails use `exceptions_app` in tests
@@ -165,6 +165,12 @@ config.consider_all_requests_local = false
 # Render exceptions instead of raising them
 config.action_dispatch.show_exceptions = true
 ```
+
+Unfortunately, controller tests (called *functional tests* in Rails) do not
+work with Gaffe, since they only test method calls in the controller class —
+they do not go through the entire Rack stack to simulate a real HTTP request.
+
+To test responses sent by Gaffe, you must use *request tests*.
 
 ## Contributors
 
