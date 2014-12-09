@@ -15,57 +15,6 @@ describe Gaffe do
       it { expect(configuration.bar).to eql :foo }
     end
 
-    describe :errors_controller_for_request do
-      let(:controller) { Gaffe.errors_controller_for_request(env) }
-      let(:request) { ActionDispatch::TestRequest.new }
-      let(:env) { request.env }
-
-      context 'with custom-defined controller' do
-        before do
-          Gaffe.configure do |config|
-            config.errors_controller = :foo
-          end
-        end
-
-        it { expect(controller).to eql :foo }
-      end
-
-      context 'with custom-defined controller that respond to `#constantize`' do
-        before do
-          Gaffe.configure do |config|
-            config.errors_controller = 'String'
-          end
-        end
-
-        it { expect(controller).to eql String }
-      end
-
-      context 'with multiple custom-defined controllers' do
-        before do
-          Gaffe.configure do |config|
-            config.errors_controller = {
-              %r{^/web/} => :web_controller,
-              %r{^/api/} => :api_controller
-            }
-          end
-        end
-
-        context 'with error coming from matching URL' do
-          let(:env) { request.env.merge 'REQUEST_URI' => '/api/users' }
-          it { expect(controller).to eql :api_controller }
-        end
-
-        context 'with errors coming from non-matching URL' do
-          let(:env) { request.env.merge 'REQUEST_URI' => '/what' }
-          it { expect(controller).to eql Gaffe::ErrorsController }
-        end
-      end
-
-      context 'without custom-defined controller' do
-        it { expect(controller).to eql Gaffe::ErrorsController }
-      end
-    end
-
     describe :enable! do
       let(:env) { ActionDispatch::TestRequest.new.env }
       let(:action_double) { double(call: proc { [400, {}, 'SOMETHING WENT WRONG.'] }) }
