@@ -24,7 +24,7 @@ module Gaffe
       controller ||= BUILTIN_CONTROLLER.call
 
       # Make sure we return a Class
-      controller.try(:constantize) || controller
+      controller.respond_to?(:constantize) ? controller.constantize : controller
     end
 
   private
