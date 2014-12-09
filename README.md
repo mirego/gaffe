@@ -3,7 +3,7 @@
     <img src="http://i.imgur.com/k9Vo08q.png" alt="gaffe" />
   </a>
   <br />
-  Gaffe makes having customized error pages in Rails applications an easy thing.<br /> It takes advantage of a feature present in Rails 3.2 (and 4.0, obviously) called <code>exceptions_app</code>.
+  Gaffe makes having customized error pages in Rails applications an easy thing.<br /> It takes advantage of a feature present in Rails 3.2 (and 4.0+, obviously) called <code>exceptions_app</code>.
   <br /><br />
   <a href="https://rubygems.org/gems/gaffe"><img src="http://img.shields.io/gem/v/gaffe.svg" /></a>
   <a href="https://codeclimate.com/github/mirego/gaffe"><img src="http://img.shields.io/codeclimate/github/mirego/gaffe.svg" /></a>
