@@ -5,13 +5,17 @@ describe Gaffe::Errors do
     describe :show do
       let(:request) { ActionDispatch::TestRequest.new }
       let(:env) { request.env.merge 'action_dispatch.exception' => exception }
+      let(:status) { response.first }
+      let(:body) { response.last.body }
 
-      let(:response) { Gaffe.errors_controller_for_request(env).action(:show).call(env).last }
+      let(:response) do
+        Gaffe.errors_controller_for_request(env).action(:show).call(env)
+      end
 
       context 'with builtin exception' do
         let(:exception) { ActionController::RoutingError.new(:foo) }
-        it { expect(response.status).to eql 404 }
-        it { expect(response.body).to match(/Not Found/) }
+        it { expect(status).to eql 404 }
+        it { expect(body).to match(/Not Found/) }
       end
 
       context 'with custom exception and missing view' do
@@ -23,8 +27,8 @@ describe Gaffe::Errors do
         end
 
         let(:exception) { exception_class.new }
-        it { expect(response.status).to eql 500 }
-        it { expect(response.body).to match(/Internal Server Error/) }
+        it { expect(status).to eql 500 }
+        it { expect(body).to match(/Internal Server Error/) }
       end
     end
   end
