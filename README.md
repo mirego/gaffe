@@ -171,6 +171,24 @@ they do not go through the entire Rack stack to simulate a real HTTP request.
 
 To test responses sent by Gaffe, you must use *request tests*.
 
+### RSpec automatic configuration
+
+Alternatively you can require `gaffe/rspec` in your `spec(|rails)_helper` to selectively
+allow error pages rendering in rspec features.
+
+```ruby
+# spec/rails_helper.rb
+require 'gaffe/rspec'
+# spec/features/whatever_spec.rb
+RSpec.feature 'Error pages', :with_error_pages do
+  scenario 'Visit non existing pages' do
+    visit '/no-such-path'
+    expect(page).to have_title 'Not Found'
+    expect(page).to have_content 'The page you were looking for does not exist'
+  end
+end
+```
+
 ## Contributors
 
 * [@remiprev](https://github.com/remiprev)
