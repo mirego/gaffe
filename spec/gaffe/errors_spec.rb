@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Gaffe::Errors do
   describe :Actions do
     describe :show do
-      let(:request) { ActionDispatch::TestRequest.new }
+      let(:request) { test_request }
       let(:env) { request.env.merge 'action_dispatch.exception' => exception }
       let(:status) { response.first }
       let(:body) { response.last.body }

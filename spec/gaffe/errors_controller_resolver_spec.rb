@@ -4,7 +4,7 @@ describe Gaffe::ErrorsControllerResolver do
   describe :resolved_controller do
     let(:resolver) { Gaffe::ErrorsControllerResolver.new(env) }
     let(:controller) { resolver.resolved_controller }
-    let(:request) { ActionDispatch::TestRequest.new }
+    let(:request) { test_request }
     let(:env) { request.env }
 
     context 'with custom-defined controller' do

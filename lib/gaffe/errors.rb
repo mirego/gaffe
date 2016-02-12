@@ -3,8 +3,13 @@ module Gaffe
     extend ActiveSupport::Concern
 
     included do
-      before_filter :fetch_exception, only: %w(show)
-      before_filter :append_view_paths
+      if Rails::VERSION::MAJOR >= 5
+        before_action :fetch_exception, only: %w(show)
+        before_action :append_view_paths
+      else
+        before_filter :fetch_exception, only: %w(show)
+        before_filter :append_view_paths
+      end
       layout 'error'
     end
 
@@ -17,8 +22,8 @@ module Gaffe
   protected
 
     def fetch_exception
-      @exception = env['action_dispatch.exception']
-      @status_code = ActionDispatch::ExceptionWrapper.new(env, @exception).status_code
+      @exception = request.env['action_dispatch.exception']
+      @status_code = ActionDispatch::ExceptionWrapper.new(request.env, @exception).status_code
       @rescue_response = ActionDispatch::ExceptionWrapper.rescue_responses[@exception.class.name]
     end
 
