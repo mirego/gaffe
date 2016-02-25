@@ -29,5 +29,13 @@ end
 class ApplicationController < ActionController::Base
 end
 
+def test_request
+  if Rails::VERSION::MAJOR >= 5
+    ActionDispatch::TestRequest.create
+  else
+    ActionDispatch::TestRequest.new
+  end
+end
+
 # We need Rails.root
 RAILS_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
