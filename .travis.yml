@@ -4,14 +4,12 @@ rvm:
   - 2.3.0
   - 2.1
   - 2.0
-  - 1.9.3
 
 sudo: false
 
 gemfile:
   - gemfiles/Gemfile.rails-4.2
   - gemfiles/Gemfile.rails-4.0
-  - gemfiles/Gemfile.rails-3.2.x
   - gemfiles/Gemfile.rails-5.0
 
 script:
@@ -20,8 +18,6 @@ script:
 
 matrix:
   exclude:
-    - rvm: 1.9.3
-      gemfile: gemfiles/Gemfile.rails-5.0
     - rvm: 2.0
       gemfile: gemfiles/Gemfile.rails-5.0
     - rvm: 2.1

@@ -3,13 +3,8 @@ module Gaffe
     extend ActiveSupport::Concern
 
     included do
-      if Rails::VERSION::MAJOR >= 5
-        before_action :fetch_exception, only: %w(show)
-        before_action :append_view_paths
-      else
-        before_filter :fetch_exception, only: %w(show)
-        before_filter :append_view_paths
-      end
+      before_action :fetch_exception, only: %w(show)
+      before_action :append_view_paths
       layout 'error'
     end
 

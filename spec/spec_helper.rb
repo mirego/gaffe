@@ -27,11 +27,6 @@ end
 
 # We need a fake "ApplicationController" because Gaffe's default controller inherits from it
 class ApplicationController < ActionController::Base
-  if Rails::VERSION::MAJOR < 4
-    def self.before_action(*args)
-      before_filter(*args)
-    end
-  end
 end
 
 def test_request
