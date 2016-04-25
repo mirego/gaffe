@@ -47,16 +47,17 @@ end
 Gaffe.enable!
 ```
 
-It’s also possible to use a custom controller based on the URL in which the error has occured. This is especially
-useful if you have an application that also serves API requests via JSON. You would probably want to serve API errors
-through JSON and regular errors through HTML pages.
+It’s also possible to use a custom controller based on the URL in which the error has occured. Both absolute and 
+relative URL supported. This is especially useful if you have an application that also serves API requests via 
+JSON. You would probably want to serve API errors through JSON and regular errors through HTML pages.
 
 ```ruby
 # config/initializers/gaffe.rb
 Gaffe.configure do |config|
   config.errors_controller = {
     %r[^/api/] => 'Api::ErrorsController',
-    %r[^/] => 'ErrorsController'
+    %r[^/] => 'ErrorsController',
+    %r[^www.example.com] => 'HostSpecificErrorsController'
   }
 end
 

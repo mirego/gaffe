@@ -30,7 +30,12 @@ module Gaffe
   private
 
     def request_controller(controllers)
-      controllers.find { |pattern, _| @env['REQUEST_URI'] =~ pattern }.try(:last)
+      matched_controllers = controllers.find do |pattern, _|
+        relative_url = @env['REQUEST_URI']
+        absolute_url = @env['HTTP_HOST'] + relative_url
+        [relative_url, absolute_url].any? { |url| (url =~ pattern).present? }
+      end
+      matched_controllers.try(:last)
     end
   end
 end
