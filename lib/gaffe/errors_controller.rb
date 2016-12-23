@@ -1,5 +1,5 @@
 module Gaffe
-  class ErrorsController < ::ApplicationController
+  class ErrorsController < ::ActionController::Base
     include Errors
   end
 end
