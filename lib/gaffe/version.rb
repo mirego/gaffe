@@ -1,3 +1,3 @@
 module Gaffe
-  VERSION = '0.2.1'
+  VERSION = '1.2.0'.freeze
 end

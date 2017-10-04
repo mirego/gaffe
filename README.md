@@ -3,18 +3,19 @@
     <img src="http://i.imgur.com/k9Vo08q.png" alt="gaffe" />
   </a>
   <br />
-  Gaffe makes having customized error pages in Rails applications an easy thing.<br /> It takes advantage of a feature present in Rails 3.2+ called <code>exceptions_app</code>.
+  Gaffe makes having customized error pages in Rails applications an easy thing.<br /> It takes advantage of a feature present in Rails 3.2 (and 4.0+, obviously) called <code>exceptions_app</code>.
   <br /><br />
-  <a href="https://rubygems.org/gems/gaffe"><img src="https://badge.fury.io/rb/gaffe.png" /></a>
-  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="https://codeclimate.com/github/mirego/gaffe.png" /></a>
-  <a href="https://travis-ci.org/mirego/gaffe"><img src="https://travis-ci.org/mirego/gaffe.png?branch=master" /></a>
+  <a href="https://rubygems.org/gems/gaffe"><img src="http://img.shields.io/gem/v/gaffe.svg" /></a>
+  <a href="https://codeclimate.com/github/mirego/gaffe"><img src="http://img.shields.io/codeclimate/github/mirego/gaffe.svg" /></a>
+  <a href='https://gemnasium.com/mirego/gaffe'><img src="http://img.shields.io/gemnasium/mirego/gaffe.svg" /></a>
+  <a href="https://travis-ci.org/mirego/gaffe"><img src="http://img.shields.io/travis/mirego/gaffe.svg" /></a>
 </p>
 
 ---
 
 It comes with default error pages but makes it very easy to override them (which you should do). The default error pages look like this:
 
-![](http://i.imgur.com/9gPfCOm.png)
+![](http://i.imgur.com/nz5nWXn.png)
 
 ## Installation
 
@@ -40,22 +41,23 @@ However, if you want to use your own controller:
 ```ruby
 # config/initializers/gaffe.rb
 Gaffe.configure do |config|
-  config.errors_controller = ErrorsController
+  config.errors_controller = 'ErrorsController'
 end
 
 Gaffe.enable!
 ```
 
-It’s also possible to use a custom controller based on the URL in which the error has occured. This is especially
-useful if you have an application that also serves API requests via JSON. You would probably want to serve API errors
-through JSON and regular errors through HTML pages.
+It’s also possible to use a custom controller based on the URL in which the error has occured. Both absolute and 
+relative URL supported. This is especially useful if you have an application that also serves API requests via 
+JSON. You would probably want to serve API errors through JSON and regular errors through HTML pages.
 
 ```ruby
 # config/initializers/gaffe.rb
 Gaffe.configure do |config|
   config.errors_controller = {
-    %r[^/api/] => Api::ErrorsController,
-    %r[^/] => ErrorsController
+    %r[^/api/] => 'Api::ErrorsController',
+    %r[^/] => 'ErrorsController',
+    %r[^www.example.com] => 'HostSpecificErrorsController'
   }
 end
 
@@ -73,26 +75,40 @@ You might also want to get rid of filters and other stuff to make sure that erro
 ```ruby
 class ErrorsController < ApplicationController
   include Gaffe::Errors
-  skip_before_filter :ensure_current_user
 
+  # Make sure anonymous users can see the page
+  skip_before_action :authenticate_user!
+
+  # Override 'error' layout
+  layout 'application'
+
+  # Render the correct template based on the exception “standard” code.
+  # Eg. For a 404 error, the `errors/not_found` template will be rendered.
   def show
-    # The following variables are available:
-    @exception # The encountered exception (Eg. `#<ActiveRecord::NotFound …>`)
-    @status_code # The status code we should return (Eg. `404`)
-    @rescue_response # The "standard" name for the status code (Eg. `:not_found`)
+    # Here, the `@exception` variable contains the original raised error
+    render "errors/#{@rescue_response}", status: @status_code
   end
 end
 ```
 
-For example, you might want your `Api::ErrorsController` to return a standard JSON response:
+For example, you might want your `API::ErrorsController` to return a standard JSON response:
 
 ```ruby
-class Api::ErrorsController < Api::ApplicationController
+class API::ErrorsController < API::ApplicationController
   include Gaffe::Errors
-  skip_before_filter :ensure_current_user
 
+  # Make sure anonymous users can see the page
+  skip_before_action :authenticate_user!
+
+  # Disable layout (your `API::ApplicationController` probably does this already)
+  layout false
+
+  # Render a simple JSON response containing the error “standard” code
+  # plus the exception name and backtrace if we’re in development.
   def show
-    render json: { error: @rescue_response }, status: @status_code
+    output = { error: @rescue_response }
+    output.merge! exception: @exception.inspect, backtrace: @exception.backtrace.first(10) if Rails.env.development? || Rails.env.test?
+    render json: output, status: @status_code
   end
 end
 ```
@@ -122,11 +138,11 @@ specific rescue responses.
 
 ```ruby
 # config/application.rb
-config.action_dispatch.rescue_responses.merge!('CanCan::AccessDenied' => :forbidden)
-config.action_dispatch.rescue_responses.merge!('MyCustomException' => :not_acceptable)
+config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
+config.action_dispatch.rescue_responses.merge! 'MyCustomException' => :not_acceptable
 ```
 
-### Rails development mode
+### Rails development environment
 
 Rails prefers to render its own debug-friendly errors in the `development` environment,
 which is totally understandable. However, if you want to test Gaffe’s behavior in development
@@ -137,14 +153,39 @@ you’ll have to edit the `config/environments/development.rb` file.
 config.consider_all_requests_local = false
 ```
 
+### Rails test environment
+
+You also have to configure Rails’ `test` environment so it lets Gaffe handle exceptions
+in request tests. You’ll have to edit the `config/environments/test.rb` file.
+
+```ruby
+# Make Rails use `exceptions_app` in tests
+config.consider_all_requests_local = false
+
+# Render exceptions instead of raising them
+config.action_dispatch.show_exceptions = true
+```
+
+Unfortunately, controller tests (called *functional tests* in Rails) do not
+work with Gaffe, since they only test method calls in the controller class —
+they do not go through the entire Rack stack to simulate a real HTTP request.
+
+To test responses sent by Gaffe, you must use *request tests*.
+
+## Contributors
+
+* [@remiprev](https://github.com/remiprev)
+* [@simonprev](https://github.com/simonprev)
+* [@jmuheim](https://github.com/jmuheim)
+
 ## License
 
-`Gaffe` is © 2013 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
+`Gaffe` is © 2013-2016 [Mirego](http://www.mirego.com) and may be freely distributed under the [New BSD license](http://opensource.org/licenses/BSD-3-Clause).  See the [`LICENSE.md`](https://github.com/mirego/gaffe/blob/master/LICENSE.md) file.
 
 The mushroom cloud logo is based on [this lovely icon](http://thenounproject.com/noun/mushroom-cloud/#icon-No18596) by [Gokce Ozan](http://thenounproject.com/occultsearcher), from The Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
 
 ## About Mirego
 
-Mirego is a team of passionate people who believe that work is a place where you can innovate and have fun. We proudly build mobile applications for [iPhone](http://mirego.com/en/iphone-app-development/ "iPhone application development"), [iPad](http://mirego.com/en/ipad-app-development/ "iPad application development"), [Android](http://mirego.com/en/android-app-development/ "Android application development"), [Blackberry](http://mirego.com/en/blackberry-app-development/ "Blackberry application development"), [Windows Phone](http://mirego.com/en/windows-phone-app-development/ "Windows Phone application development") and [Windows 8](http://mirego.com/en/windows-8-app-development/ "Windows 8 application development") in beautiful Quebec City.
+[Mirego](http://mirego.com) is a team of passionate people who believe that work is a place where you can innovate and have fun. We're a team of [talented people](http://life.mirego.com) who imagine and build beautiful Web and mobile applications. We come together to share ideas and [change the world](http://mirego.org).
 
-We also love [open-source software](http://open.mirego.com/) and we try to extract as much code as possible from our projects to give back to the community.
+We also [love open-source software](http://open.mirego.com) and we try to give back to the community as much as we can.

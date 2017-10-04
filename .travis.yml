@@ -1,11 +1,32 @@
 language: ruby
 
 rvm:
-  - 2.0.0
-  - 1.9.3
+  - 2.3.0
+  - 2.1
+  - 2.0
+
+sudo: false
 
 gemfile:
+  - gemfiles/Gemfile.rails-4.2
   - gemfiles/Gemfile.rails-4.0
-  - gemfiles/Gemfile.rails-3.2.x
+  - gemfiles/Gemfile.rails-5.0
 
-script: "echo 'DO IT' && bundle exec rake spec"
+script:
+  - 'echo "Checking code style" && bundle exec phare'
+  - 'echo "Running specs" && bundle exec rake spec'
+
+matrix:
+  exclude:
+    - rvm: 2.0
+      gemfile: gemfiles/Gemfile.rails-5.0
+    - rvm: 2.1
+      gemfile: gemfiles/Gemfile.rails-5.0
+
+notifications:
+  hipchat:
+    rooms:
+      secure: HwIKOZp8SIVCnPseNTJqZgrUBr7/7z5RGczqX7lGWOXK/S6Zwm/YyglC5ueN+HW2Tsc9nQkVLmLb7fH4kctdeanKea3TTfYS1+GmUOZPhFie4nFnywIgz7os//LfNONIF42Ix94HsmuhsQ6yVPMOU+mYnN9L/ZrWML5NH03mIOw=
+    template:
+      - '%{repository}#%{build_number} (%{branch} - %{commit} : %{author}): %{message} (<a href="%{build_url}">Build</a>/<a href="%{compare_url}">Changes</a>)'
+    format: 'html'
