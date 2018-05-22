@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '>= 0.21'
   spec.add_development_dependency 'phare'
 
-  spec.add_dependency 'rails', '>= 4.0.0'
+  spec.add_dependency 'rails', '>= 4.2.7.1'
 end
